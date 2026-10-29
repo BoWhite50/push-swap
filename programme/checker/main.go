@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 
 	"push-swap/instructions"
 	"push-swap/parsing"
@@ -25,21 +26,20 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for scanner.Scan() {
-		ligne := scanner.Text()
-
+		ligne := strings.TrimSuffix(scanner.Text(), "\r")
 		err = p.Apply(ligne)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "Error")
 			os.Exit(1)
 		}
 	}
-	if p.EstTrie() == true {
-		fmt.Println("OK")
-	} else {
-		fmt.Println("KO")
-	}
 	if err := scanner.Err(); err != nil {
 		fmt.Fprintln(os.Stderr, "Error")
 		os.Exit(1)
+	}
+	if p.EstTrie() {
+		fmt.Println("OK")
+	} else {
+		fmt.Println("KO")
 	}
 }
