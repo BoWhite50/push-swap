@@ -29,7 +29,7 @@ func Trier(nombres []int) []string {
 
 // jouer fait l'instruction sur les piles et la note dans coups.
 func jouer(p *instructions.Piles, coups *[]string, nom string) {
-	p.Apply(nom)
+	_ = p.Apply(nom) // les noms viennent de notre code, ils sont toujours valides
 	*coups = append(*coups, nom)
 }
 
@@ -91,8 +91,8 @@ func copier(p instructions.Piles) instructions.Piles {
 }
 
 // trierGrand trie dans les cas ou il y a plus de 6 nombres par paquets :
-//  1. on envoie A dans B par paquets de petits nombres
-//  2. on ramène toujours le plus grand de B en haut de A.
+//  1- on envoie A dans B par paquets de petits nombres
+//  2- on ramène toujours le plus grand de B en haut de A.
 func trierGrand(p *instructions.Piles, coups *[]string) {
 	p.A = rangs(p.A)
 	paquet := 15
@@ -132,7 +132,7 @@ func monter(p *instructions.Piles, coups *[]string, pos int, taille int, r strin
 	}
 }
 
-// posMax donne la position du plus grand nombre de list.
+// posMax donne la position du plus grand nombre de list
 func posMax(list []int) int {
 	pos := 0
 	for i := 1; i < len(list); i++ {

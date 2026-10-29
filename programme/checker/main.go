@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
-	"strings"
 
 	"push-swap/instructions"
 	"push-swap/parsing"
@@ -23,19 +21,7 @@ func main() {
 
 	p := instructions.Piles{A: nombres}
 
-	scanner := bufio.NewScanner(os.Stdin)
-
-	for scanner.Scan() {
-		ligne := strings.TrimSuffix(scanner.Text(), "\r")
-		if ligne == "" {
-			continue
-		}
-		if err := p.Apply(ligne); err != nil {
-			fmt.Fprintln(os.Stderr, "Error")
-			os.Exit(1)
-		}
-	}
-	if err := scanner.Err(); err != nil {
+	if err := p.Executer(os.Stdin); err != nil {
 		fmt.Fprintln(os.Stderr, "Error")
 		os.Exit(1)
 	}

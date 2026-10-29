@@ -8,8 +8,7 @@ import (
 	"push-swap/instructions"
 )
 
-// verifier joue les coups de Trier sur une nouvelle pile, comme le ferait checker,
-// et renvoie le nombre de coups.
+// verifier joue les coups de Trier sur une nouvelle pile, comme le ferait checker il renvoie le nombre de coups
 func verifier(t *testing.T, nombres []int) int {
 	t.Helper()
 	coups := Trier(slices.Clone(nombres))

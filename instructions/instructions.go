@@ -32,39 +32,39 @@ func reverseRotate(list *[]int) {
 		*list = append([]int{(*list)[len(*list)-1]}, (*list)[:len(*list)-1]...)
 	}
 }
-func (p *Piles) Pa() {
+func (p *Piles) pa() {
 	push(&p.B, &p.A)
 }
-func (p *Piles) Pb() {
+func (p *Piles) pb() {
 	push(&p.A, &p.B)
 }
-func (p *Piles) Sa() {
+func (p *Piles) sa() {
 	swap(&p.A)
 }
-func (p *Piles) Sb() {
+func (p *Piles) sb() {
 	swap(&p.B)
 }
-func (p *Piles) Ra() {
+func (p *Piles) ra() {
 	rotate(&p.A)
 }
-func (p *Piles) Rb() {
+func (p *Piles) rb() {
 	rotate(&p.B)
 }
-func (p *Piles) Rra() {
+func (p *Piles) rra() {
 	reverseRotate(&p.A)
 }
-func (p *Piles) Rrb() {
+func (p *Piles) rrb() {
 	reverseRotate(&p.B)
 }
-func (p *Piles) Ss() {
+func (p *Piles) ss() {
 	swap(&p.A)
 	swap(&p.B)
 }
-func (p *Piles) Rr() {
+func (p *Piles) rr() {
 	rotate(&p.A)
 	rotate(&p.B)
 }
-func (p *Piles) Rrr() {
+func (p *Piles) rrr() {
 	reverseRotate(&p.A)
 	reverseRotate(&p.B)
 }
@@ -73,27 +73,27 @@ func (p *Piles) Rrr() {
 func (p *Piles) Apply(nom string) error {
 	switch nom {
 	case "pa":
-		p.Pa()
+		p.pa()
 	case "pb":
-		p.Pb()
+		p.pb()
 	case "sa":
-		p.Sa()
+		p.sa()
 	case "sb":
-		p.Sb()
+		p.sb()
 	case "ss":
-		p.Ss()
+		p.ss()
 	case "ra":
-		p.Ra()
+		p.ra()
 	case "rb":
-		p.Rb()
+		p.rb()
 	case "rr":
-		p.Rr()
+		p.rr()
 	case "rra":
-		p.Rra()
+		p.rra()
 	case "rrb":
-		p.Rrb()
+		p.rrb()
 	case "rrr":
-		p.Rrr()
+		p.rrr()
 	default:
 		return errors.New("instruction inconnue")
 	}
