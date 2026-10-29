@@ -1,5 +1,7 @@
 package instructions
 
+import "errors"
+
 type Piles struct {
 	A []int
 	B []int
@@ -64,4 +66,49 @@ func (p *Piles) Rr() {
 func (p *Piles) Rrr() {
 	reverseRotate(&p.A)
 	reverseRotate(&p.B)
+}
+
+func (p *Piles) Apply(nom string) error {
+	switch nom {
+	case "pa":
+		p.Pa()
+	case "pb":
+		p.Pb()
+	case "sa":
+		p.Sa()
+	case "sb":
+		p.Sb()
+	case "ss":
+		p.Ss()
+	case "ra":
+		p.Ra()
+	case "rb":
+		p.Rb()
+	case "rr":
+		p.Rr()
+	case "rra":
+		p.Rra()
+	case "rrb":
+		p.Rrb()
+	case "rrr":
+		p.Rrr()
+	default:
+		return errors.New("instruction inconnue")
+	}
+	return nil
+}
+
+// EstTrie dit si A est croissante et B est vide.
+func (p *Piles) EstTrie() bool {
+	if p.B != nil{
+		return false
+	}
+
+	for i := 1; i < len(p.A); i++ {
+		if p.A[i-1]>p.A[i] {
+			return	false
+		}
+	}
+
+	return true
 }
