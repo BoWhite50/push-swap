@@ -69,7 +69,8 @@ func (p *Piles) rrr() {
 	reverseRotate(&p.B)
 }
 
-// Apply applique les bonne instructions celon le choix(nom)
+// Apply applique l'instruction nom sur les piles.
+// Elle renvoie une erreur si l'instruction n'existe pas.
 func (p *Piles) Apply(nom string) error {
 	switch nom {
 	case "pa":

@@ -6,6 +6,7 @@ import (
 )
 
 // TestInstructions vérifie chaque instruction : on part de piles connues,
+// on applique l'instruction, puis on compare avec les piles attendues.
 func TestInstructions(t *testing.T) {
 	tests := []struct {
 		nom     string

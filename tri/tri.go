@@ -10,7 +10,7 @@ import (
 // Trier renvoie la liste des instructions qui trient nombres.
 func Trier(nombres []int) []string {
 	var coups []string
-	p := instructions.Piles{A: nombres}
+	p := instructions.Piles{A: slices.Clone(nombres)}
 	if p.EstTrie() {
 		return nil
 	}
@@ -63,8 +63,8 @@ func trierPetit(p *instructions.Piles, coups *[]string) {
 		courant := file[0]
 		file = file[1:]
 		for _, nom := range tousLesCoups {
-			suivant := copier(courant.piles) // une copie, pour ne pas abîmer courant
-			suivant.Apply(nom)
+			suivant := copier(courant.piles)
+			_ = suivant.Apply(nom)
 			cle := fmt.Sprint(suivant.A, suivant.B)
 			if dejaVu[cle] {
 				continue
@@ -91,7 +91,6 @@ func copier(p instructions.Piles) instructions.Piles {
 }
 
 // trierGrand trie dans les cas ou il y a plus de 6 nombres par paquets :
-
 // 1- on envoie A dans B par paquets de petits nombres
 // 2- on ramène toujours le plus grand de B en haut de A.
 func trierGrand(p *instructions.Piles, coups *[]string) {
