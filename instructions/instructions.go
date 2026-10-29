@@ -1,6 +1,6 @@
 package instructions
 
-type piles struct {
+type Piles struct {
 	A []int
 	B []int
 }
@@ -29,39 +29,39 @@ func reverseRotate(list *[]int) {
 		*list = append([]int{(*list)[len(*list)-1]}, (*list)[:len(*list)-1]...)
 	}
 }
-func (p *piles) Pa() {
+func (p *Piles) Pa() {
 	push(&p.B, &p.A)
 }
-func (p *piles) Pb() {
+func (p *Piles) Pb() {
 	push(&p.A, &p.B)
 }
-func (p *piles) Sa() {
+func (p *Piles) Sa() {
 	swap(&p.A)
 }
-func (p *piles) Sb() {
+func (p *Piles) Sb() {
 	swap(&p.B)
 }
-func (p *piles) Ra() {
+func (p *Piles) Ra() {
 	rotate(&p.A)
 }
-func (p *piles) Rb() {
+func (p *Piles) Rb() {
 	rotate(&p.B)
 }
-func (p *piles) Rra() {
+func (p *Piles) Rra() {
 	reverseRotate(&p.A)
 }
-func (p *piles) Rrb() {
+func (p *Piles) Rrb() {
 	reverseRotate(&p.B)
 }
-func (p *piles) Ss() {
+func (p *Piles) Ss() {
 	swap(&p.A)
 	swap(&p.B)
 }
-func (p *piles) Rr() {
+func (p *Piles) Rr() {
 	rotate(&p.A)
 	rotate(&p.B)
 }
-func (p *piles) Rrr() {
+func (p *Piles) Rrr() {
 	reverseRotate(&p.A)
 	reverseRotate(&p.B)
 }
