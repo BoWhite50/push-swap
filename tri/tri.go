@@ -67,7 +67,7 @@ func trierGrand(p *instructions.Piles, coups *[]string) {
 	if len(p.A) > 100 {
 		paquet = 30
 	}
-	compteurPourB := 0 
+	compteurPourB := 0
 	for len(p.A) > 0 {
 		rang := p.A[0]
 		if rang <= compteurPourB {
@@ -122,7 +122,7 @@ func posMax(list []int) int {
 	return pos
 }
 
-// rangs remplace chaque nombre par sa place dans la liste triée 
+// rangs remplace chaque nombre par sa place dans la liste triée
 func rangs(nombres []int) []int {
 	copie := slices.Clone(nombres)
 	slices.Sort(copie)
