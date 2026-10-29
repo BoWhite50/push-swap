@@ -32,11 +32,11 @@ Le projet contient deux programmes :
 ```
 git clone https://github.com/BoWhite50/push-swap.git
 cd push-swap
-go build -o push-swap ./programme/push-swap
-go build -o checker ./programme/checker
+go build -o push-swap ./cmd/push-swap
+go build -o checker ./cmd/checker
 ```
 
-Sous Windows, ajoute `.exe` au nom : `go build -o push-swap.exe ./programme/push-swap`.
+Sous Windows, ajoute `.exe` au nom : `go build -o push-swap.exe ./cmd/push-swap`.
 
 ## Configuration
 
@@ -77,7 +77,7 @@ push-swap/
 ├── parsing/        transforme les arguments en liste d'entiers et détecte les erreurs
 ├── instructions/   les deux piles et les 11 instructions
 ├── tri/            l'algorithme qui choisit les instructions
-└── programme/
+└── cmd/
     ├── checker/    le programme checker
     └── push-swap/  le programme push-swap
 ```
