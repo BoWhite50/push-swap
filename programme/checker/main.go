@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 
@@ -18,8 +19,27 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Error")
 		os.Exit(1)
 	}
-	fmt.Println(nombres, err)
 
 	p := instructions.Piles{A: nombres}
-	fmt.Println(p.EstTrie())
+
+	scanner := bufio.NewScanner(os.Stdin)
+
+	for scanner.Scan() {
+		ligne := scanner.Text()
+
+		err = p.Apply(ligne)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "Error")
+			os.Exit(1)
+		}
+	}
+	if p.EstTrie() == true {
+		fmt.Println("OK")
+	} else {
+		fmt.Println("KO")
+	}
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintln(os.Stderr, "Error")
+		os.Exit(1)
+	}
 }

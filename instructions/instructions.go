@@ -100,13 +100,13 @@ func (p *Piles) Apply(nom string) error {
 
 // EstTrie dit si A est croissante et B est vide.
 func (p *Piles) EstTrie() bool {
-	if p.B != nil{
+	if len(p.B) != 0 {
 		return false
 	}
 
 	for i := 1; i < len(p.A); i++ {
-		if p.A[i-1]>p.A[i] {
-			return	false
+		if p.A[i-1] > p.A[i] {
+			return false
 		}
 	}
 
