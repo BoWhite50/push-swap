@@ -1,9 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
 
-// Programme checker : lit les instructions sur l'entrée standard
-// et affiche OK ou KO (voir l'étape 2 du plan).
+	"push-swap/parsing"
+)
+
 func main() {
-	fmt.Println("hello depuis checker")
+	nombres, err := parsing.ParseArgs(os.Args[1:])
+	fmt.Println(nombres, err)
 }
