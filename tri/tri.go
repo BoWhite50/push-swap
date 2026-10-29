@@ -91,9 +91,9 @@ func copier(p instructions.Piles) instructions.Piles {
 }
 
 // trierGrand trie dans les cas ou il y a plus de 6 nombres par paquets :
-//
-//	1- on envoie A dans B par paquets de petits nombres
-//	2- on ramène toujours le plus grand de B en haut de A.
+
+// 1- on envoie A dans B par paquets de petits nombres
+// 2- on ramène toujours le plus grand de B en haut de A.
 func trierGrand(p *instructions.Piles, coups *[]string) {
 	p.A = rangs(p.A)
 	paquet := 15
