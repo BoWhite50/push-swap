@@ -2,6 +2,7 @@ package instructions
 
 import "errors"
 
+// A[0] correspond au sommet
 type Piles struct {
 	A []int
 	B []int
@@ -68,6 +69,7 @@ func (p *Piles) Rrr() {
 	reverseRotate(&p.B)
 }
 
+// Apply applique les bonne instructions celon le choix(nom)
 func (p *Piles) Apply(nom string) error {
 	switch nom {
 	case "pa":
@@ -98,7 +100,7 @@ func (p *Piles) Apply(nom string) error {
 	return nil
 }
 
-// EstTrie dit si A est croissante et B est vide.
+// EstTrie dit si A est croissante et B est vide
 func (p *Piles) EstTrie() bool {
 	if len(p.B) != 0 {
 		return false

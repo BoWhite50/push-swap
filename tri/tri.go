@@ -1,6 +1,7 @@
 package tri
 
 import (
+	"fmt"
 	"slices"
 
 	"push-swap/instructions"
@@ -18,8 +19,8 @@ func Trier(nombres []int) []string {
 		jouer(&p, &coups, "sa")
 	case 3:
 		trier3(&p, &coups)
-	case 4, 5:
-		trier5(&p, &coups)
+	case 4, 5, 6:
+		trierPetit(&p, &coups)
 	default:
 		trierGrand(&p, &coups)
 	}
@@ -46,19 +47,50 @@ func trier3(p *instructions.Piles, coups *[]string) {
 	}
 }
 
-// trier5 trie 4 ou 5 nombres : on range les plus petits dans B,
-func trier5(p *instructions.Piles, coups *[]string) {
-	for len(p.A) > 3 {
-		monter(p, coups, posMin(p.A), len(p.A), "ra", "rra")
-		jouer(p, coups, "pb")
+// tousLesCoups contient les 11 instructions du sujet.
+var tousLesCoups = []string{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"}
+
+// trierPetit trouve la suite de coups la plus courte pour 4 à 6 nombres on verifie en brute force.
+func trierPetit(p *instructions.Piles, coups *[]string) {
+	type etape struct {
+		piles instructions.Piles
+		coups []string
 	}
-	trier3(p, coups)
-	for len(p.B) > 0 {
-		jouer(p, coups, "pa")
+	file := []etape{{*p, nil}}
+	dejaVu := map[string]bool{fmt.Sprint(p.A, p.B): true}
+
+	for len(file) > 0 {
+		courant := file[0]
+		file = file[1:]
+		for _, nom := range tousLesCoups {
+			suivant := copier(courant.piles) // une copie, pour ne pas abîmer courant
+			suivant.Apply(nom)
+			cle := fmt.Sprint(suivant.A, suivant.B)
+			if dejaVu[cle] {
+				continue
+			}
+			dejaVu[cle] = true
+			suite := append(slices.Clone(courant.coups), nom)
+			if suivant.EstTrie() {
+				for _, coup := range suite {
+					jouer(p, coups, coup)
+				}
+				return
+			}
+			file = append(file, etape{suivant, suite})
+		}
 	}
 }
 
-// trierGrand trie dans les cas ou il y a plus de 5 nombres par paquets :
+// copier renvoie une copie des deux piles sans modifier l'original
+func copier(p instructions.Piles) instructions.Piles {
+	var copie instructions.Piles
+	copie.A = append(copie.A, p.A...)
+	copie.B = append(copie.B, p.B...)
+	return copie
+}
+
+// trierGrand trie dans les cas ou il y a plus de 6 nombres par paquets :
 //  1. on envoie A dans B par paquets de petits nombres
 //  2. on ramène toujours le plus grand de B en haut de A.
 func trierGrand(p *instructions.Piles, coups *[]string) {
@@ -98,17 +130,6 @@ func monter(p *instructions.Piles, coups *[]string, pos int, taille int, r strin
 			jouer(p, coups, rr)
 		}
 	}
-}
-
-// posMin renvoie la position du plus petit nombre de list.
-func posMin(list []int) int {
-	pos := 0
-	for i := 1; i < len(list); i++ {
-		if list[i] < list[pos] {
-			pos = i
-		}
-	}
-	return pos
 }
 
 // posMax donne la position du plus grand nombre de list.

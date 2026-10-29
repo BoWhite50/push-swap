@@ -27,6 +27,9 @@ func main() {
 
 	for scanner.Scan() {
 		ligne := strings.TrimSuffix(scanner.Text(), "\r")
+		if ligne == "" {
+			continue
+		}
 		if err := p.Apply(ligne); err != nil {
 			fmt.Fprintln(os.Stderr, "Error")
 			os.Exit(1)

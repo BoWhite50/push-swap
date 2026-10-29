@@ -1,5 +1,3 @@
-// Package parsing transforme les arguments du programme en liste d'entiers.
-// Il est partagé par checker et push-swap.
 package parsing
 
 import (

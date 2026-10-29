@@ -47,7 +47,7 @@ func TestDejaTrie(t *testing.T) {
 }
 
 func TestPetitesListes(t *testing.T) {
-	maxCoups := map[int]int{2: 1, 3: 2, 4: 8, 5: 12}
+	maxCoups := map[int]int{2: 1, 3: 2, 4: 5, 5: 8}
 	for taille, limite := range maxCoups {
 		list := make([]int, taille)
 		for i := range list {
@@ -61,8 +61,14 @@ func TestPetitesListes(t *testing.T) {
 	}
 }
 
-func TestExempleDuSujet(t *testing.T) {
-	verifier(t, []int{4, 67, 3, 87, 23})
+func TestExemplesDuSujet(t *testing.T) {
+	// le sujet montre 6 coups pour le premier exemple et 7 pour le second
+	if n := verifier(t, []int{4, 67, 3, 87, 23}); n > 6 {
+		t.Errorf("4 67 3 87 23 : %d coups, le sujet en fait 6", n)
+	}
+	if n := verifier(t, []int{2, 1, 3, 6, 5, 8}); n > 7 {
+		t.Errorf("2 1 3 6 5 8 : %d coups, le sujet en fait 7", n)
+	}
 }
 
 func TestGrandesListes(t *testing.T) {
