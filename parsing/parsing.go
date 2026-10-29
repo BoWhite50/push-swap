@@ -8,25 +8,22 @@ import (
 	"strings"
 )
 
+// ParseArgs renvoie une erreur si un morceau n'est pas un entier ou s'il apparaît deux fois.
 func ParseArgs(args []string) ([]int, error) {
 	var nombres []int
-
 	morceaux := strings.Fields(strings.Join(args, " "))
-	doublon := make(map[int]bool)
+	dejaVu := make(map[int]bool)
 
-	for i := 0; i < len(morceaux); i++ {
-		n, err := strconv.Atoi(morceaux[i])
+	for _, morceau := range morceaux {
+		n, err := strconv.Atoi(morceau)
 		if err != nil {
 			return nil, err
 		}
-
-		nombres = append(nombres, n)
-
-		if doublon[n] == true {
+		if dejaVu[n] {
 			return nil, errors.New("doublon")
-		} else {
-			doublon[n] = true
 		}
+		dejaVu[n] = true
+		nombres = append(nombres, n)
 	}
 	return nombres, nil
 }
