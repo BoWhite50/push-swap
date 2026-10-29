@@ -47,7 +47,7 @@ func trier3(p *instructions.Piles, coups *[]string) {
 	}
 }
 
-// tousLesCoups contient les 11 instructions du sujet.
+// tousLesCoups contient les 11 coups possibles
 var tousLesCoups = []string{"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"}
 
 // trierPetit trouve la suite de coups la plus courte pour 4 à 6 nombres on verifie en brute force.
